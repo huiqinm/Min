@@ -55,7 +55,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@import "@/styles/theme.scss";`,
+          additionalData: `@import "@/styles/theme.scss";`, //设置全局变量（字号、颜色）
         },
       },
     },

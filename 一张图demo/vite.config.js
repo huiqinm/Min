@@ -21,7 +21,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
     ],
     envDir: "env", //或"./env",用于加载 .env 文件的目录
     server: {
-      port: 5326,
+      port: 5327,
       // host: "",
       proxy: {
         // 本地开发环境通过代理实现跨域，生产环境使用 nginx 转发

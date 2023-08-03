@@ -50,14 +50,19 @@ onUpdated(() => {});
 <style scoped lang="scss">
 .menu-wrap {
   position: absolute;
-  bottom: 0;
-  height: 5rem;
+  bottom: 2rem;
   width: 100%;
-  background: pink;
+
   display: flex;
   justify-content: center;
   :deep(.arco-menu-horizontal) {
     width: fit-content;
+    width: 64.5rem;
+    height: 4.8rem;
+    padding: 0 8rem;
+    background-image: url("../../../assets/images/common/bg/menubg2.png");
+    background-size: 100% 100%;
+    background-color: transparent;
     .arco-menu-inner {
       padding: 0;
       overflow: hidden;
@@ -72,6 +77,7 @@ onUpdated(() => {});
           height: 100%;
           display: flex;
           align-items: center;
+          background: transparent;
 
           &:not(:last-child) {
             margin-right: 4.5rem;

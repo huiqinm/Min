@@ -72,7 +72,7 @@ onUpdated(() => {});
     }
     .arco-divider {
       margin: 0 0.8rem;
-      border-left: 0.05rem solid #00ffff;
+      border-left: 0.05rem solid $font-color-active;
       height: 0.9rem;
     }
   }
@@ -82,12 +82,6 @@ onUpdated(() => {});
     color: $font-color-secondary;
     font-size: 1.2rem;
     line-height: 1.2rem;
-
-    // > div {
-    //   &:not(:last-child) {
-    //     margin-right: 0.8rem;
-    //   }
-    // }
     .time {
       background-image: url("../../../assets/images/common/bg/timebg.png");
       background-size: 100% 100%;

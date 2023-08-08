@@ -20,46 +20,94 @@ import { usePanelStore } from "@/stores";
 const panelStore = usePanelStore();
 let { panelState } = storeToRefs(panelStore);
 
-// 面板展开与收起
+// 面板展开与收起 // TODO 路由切换，恢复默认展开
 const leftCollapse = ref(false); //左侧面板是否收起
 const rightCollapse = ref(false); //右侧面板是否收起
-const leftPanelWidth = ref(panelState.value.leftWidth); //左侧面板宽度
-const rightPanelWidth = ref(panelState.value.rightWidth); //右侧面板宽度
-function toggleCollapseLeft() {
-  leftCollapse.value = !leftCollapse.value;
-  leftPanelWidth.value = leftCollapse.value ? 0 : 30;
-  //设置全局状态
-  let obj = panelState.value;
-  obj.leftWidth = leftPanelWidth.value;
-  panelStore.setPanelState(obj);
-}
 
-function toggleCollapseRight() {
-  rightCollapse.value = !rightCollapse.value;
-  rightPanelWidth.value = rightCollapse.value ? 0 : 30;
-  //设置全局状态
-  let obj = panelState.value;
-  obj.rightWidth = rightPanelWidth.value;
-  panelStore.setPanelState(obj);
-}
+let widthList = [
+  {
+    path: "/nav1",
+    left_width: 50,
+    right_width: 50,
+  },
+  {
+    path: "/nav3",
+    left_width: 30,
+    right_width: 10,
+  },
+];
 
-// 顶部tags
-const hideTags = computed(() => {
-  return ["/test"].indexOf($router.currentRoute.name) > -1;
+const num3 = computed(() => {
+  return Number(num1.value) + Number(num2.value);
 });
 
-// 可以直接侦听一个 ref
+const expandWidthLeft = computed(() => {
+  let obj = widthList.find((item) => item.path === $router.currentRoute.path);
+  console.log(" $router.currentRoute.path======", $router.currentRoute.path);
+  console.log("obj1======", obj);
+  return obj ? obj.left_width : 30;
+});
+
+const expandWidthRight = computed(() => {
+  let obj = widthList.find((item) => item.path === $router.currentRoute.path);
+  return obj ? obj.right_width : 30;
+});
+
+// 监听路由
 watch(
   () => $router.currentRoute.name,
   async (newValue, oldValue) => {
-    //滚动条复位
-    document.querySelector(".main-wrap").scrollTop = 0;
+    // document.querySelector(".main-wrap").scrollTop = 0; //滚动条复位
+  }
+);
+
+// 监听showLeft-左侧面板是否显示，设置左侧面板宽度
+watch(
+  () => panelStore.panelState.showLeft,
+  async (newValue, oldValue) => {
+    let leftPanel = newValue ? expandWidthLeft.value : 0;
+    //设置全局状态
+    let obj = panelState.value;
+    obj.leftWidth = leftPanel;
+    panelStore.setPanelState(obj);
+  }
+);
+
+// 监听showRight-右侧面板是否显示，设置右侧面板宽度
+watch(
+  () => panelStore.panelState.showRight,
+  async (newValue, oldValue) => {
+    let rightPanel = newValue ? expandWidthRight.value : 0;
+    //设置全局状态
+    let obj = panelState.value;
+    obj.rightWidth = rightPanel;
+    panelStore.setPanelState(obj);
   }
 );
 
 onMounted(() => {});
 
 onUnmounted(() => {});
+
+// 左侧面板展开/收起
+function toggleCollapseLeft() {
+  leftCollapse.value = !leftCollapse.value;
+  let leftPanel = leftCollapse.value ? 0 : expandWidthLeft.value;
+  //设置全局状态
+  let obj = panelState.value;
+  obj.leftWidth = leftPanel;
+  panelStore.setPanelState(obj);
+}
+
+// 右侧面板展开/收起
+function toggleCollapseRight() {
+  rightCollapse.value = !rightCollapse.value;
+  let rightPanel = rightCollapse.value ? 0 : expandWidthRight.value;
+  //设置全局状态
+  let obj = panelState.value;
+  obj.rightWidth = rightPanel;
+  panelStore.setPanelState(obj);
+}
 </script>
 
 <template>
@@ -75,7 +123,7 @@ onUnmounted(() => {});
     <div
       v-show="panelState.showLeft"
       class="left-wrap panel-wrap"
-      :style="{ width: `${leftPanelWidth}rem` }"
+      :style="{ width: `${panelState.leftWidth}rem` }"
     >
       <div class="component-wrap">
         <router-view v-slot="{ Component }" name="left">
@@ -96,7 +144,7 @@ onUnmounted(() => {});
     <div
       v-show="panelState.showRight"
       class="right-wrap panel-wrap"
-      :style="{ width: `${rightPanelWidth}rem` }"
+      :style="{ width: `${panelState.rightWidth}rem` }"
     >
       <div class="component-wrap">
         <router-view v-slot="{ Component }" name="right">
@@ -128,11 +176,11 @@ onUnmounted(() => {});
 
   .panel-wrap {
     height: calc(100% - 6.25rem);
-    background: #fff;
-    opacity: 0.85;
+    background: #333c4c;
+    opacity: 0.88;
     position: absolute;
     top: 5.25rem;
-    z-index: 2;
+
     transition: all 0.5s;
 
     .component-wrap {
@@ -143,33 +191,31 @@ onUnmounted(() => {});
       }
     }
 
+    .collapse-btn {
+      font-size: 1.4rem;
+      width: 3.3rem;
+      height: 3.3rem;
+      position: absolute;
+
+      top: 30%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
     &.left-wrap {
-      left: 0.9rem;
-      border-right: 0.03rem solid var(--color-border);
+      left: 2.4rem;
+      border-right: 0.05rem solid var(--color-border);
 
       .collapse-btn {
-        font-size: 1.4rem;
-        width: 3.3rem;
-        height: 3.3rem;
-        position: absolute;
         right: -1.65rem;
-        top: 30%;
-        z-index: 2;
       }
     }
 
     &.right-wrap {
-      right: 0.9rem;
-      border-left: 0.03rem solid var(--color-border);
+      right: 2.4rem;
+      border-left: 0.05rem solid var(--color-border);
 
       .collapse-btn {
-        font-size: 1.4rem;
-        width: 3.3rem;
-        height: 3.3rem;
-        position: absolute;
         left: -1.65rem;
-        top: 30%;
-        z-index: 2;
       }
     }
   }

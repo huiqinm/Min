@@ -20,10 +20,10 @@ export const usePanelStore = defineStore("panel", {
   state: () => {
     return {
       panelState: {
-        showLeft: "true",
-        showRight: "true",
-        leftWidth: 30,
-        rightWidth: 30,
+        showLeft: "true", //左侧面板是否展示
+        showRight: "true", //右侧面板是否展示
+        leftWidth: 30, //左侧面板宽度
+        rightWidth: 30, //右侧面板宽度
       },
     };
   },

@@ -69,7 +69,7 @@ function onMenuClick(path) {
 
 <template>
   <div class="menu-wrap">
-    <a-menu
+    <!-- <a-menu
       mode="horizontal"
       :selected-keys="[$router.currentRoute.path]"
       @menu-item-click="onMenuItemClick"
@@ -77,7 +77,7 @@ function onMenuClick(path) {
       <a-menu-item v-for="item in menuList" :key="item.path">
         {{ item.text }}
       </a-menu-item>
-    </a-menu>
+    </a-menu> -->
     <div class="swiper-wrap">
       <swiper :modules="modules" class="mySwiper" v-bind="swiperOption">
         <swiper-slide v-for="(item, index) in menuList" :key="index">
@@ -88,9 +88,8 @@ function onMenuClick(path) {
           >
         </swiper-slide>
       </swiper>
-      <!--左箭头。如果放置在swiper-container外面，需要自定义样式。-->
+      <!--前进后退按钮，放置在swiper-container外面，需要自定义样式。-->
       <div class="swiper-button-prev swiper-button"></div>
-      <!--右箭头。如果放置在swiper-container外面，需要自定义样式。-->
       <div class="swiper-button-next swiper-button"></div>
     </div>
   </div>
@@ -114,55 +113,55 @@ function onMenuClick(path) {
     padding: 0 10rem;
   }
 
-  :deep(.arco-menu-horizontal) {
-    width: fit-content;
-    width: 64.5rem;
-    height: 4.8rem;
-    padding: 0 8rem;
-    background-image: url("../../../assets/images/common/bg/menubg.png");
-    background-size: 100% 100%;
-    background-color: transparent;
-    margin: 0 auto 1rem;
-    .arco-menu-inner {
-      padding: 0;
-      overflow: hidden;
-      .arco-menu-overflow-wrap {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        .arco-menu-item {
-          padding: 0;
-          margin-left: 0;
-          color: #a8d8d8;
-          font-size: 1.2rem;
-          height: 2.75rem;
-          display: flex;
-          align-items: center;
-          background: transparent;
-          background-image: url("../../../assets/images/common/bg/menuitem1.png");
-          background-size: 100% 100%;
-          padding: 0 2.2rem;
+  // :deep(.arco-menu-horizontal) {
+  //   width: fit-content;
+  //   width: 64.5rem;
+  //   height: 4.8rem;
+  //   padding: 0 8rem;
+  //   background-image: url("../../../assets/images/common/bg/menubg.png");
+  //   background-size: 100% 100%;
+  //   background-color: transparent;
+  //   margin: 0 auto 1rem;
+  //   .arco-menu-inner {
+  //     padding: 0;
+  //     overflow: hidden;
+  //     .arco-menu-overflow-wrap {
+  //       height: 100%;
+  //       display: flex;
+  //       align-items: center;
+  //       justify-content: center;
+  //       .arco-menu-item {
+  //         padding: 0;
+  //         margin-left: 0;
+  //         color: #a8d8d8;
+  //         font-size: 1.2rem;
+  //         height: 2.75rem;
+  //         display: flex;
+  //         align-items: center;
+  //         background: transparent;
+  //         background-image: url("../../../assets/images/common/bg/menuitem1.png");
+  //         background-size: 100% 100%;
+  //         padding: 0 2.2rem;
 
-          &:not(:last-child) {
-            margin-right: 0.5rem;
-          }
+  //         &:not(:last-child) {
+  //           margin-right: 0.5rem;
+  //         }
 
-          .arco-menu-icon {
-            margin-right: 0.9rem;
-          }
+  //         .arco-menu-icon {
+  //           margin-right: 0.9rem;
+  //         }
 
-          &.arco-menu-selected {
-            color: $font-color-active;
-            font-weight: 600;
-          }
-        }
-      }
-    }
+  //         &.arco-menu-selected {
+  //           color: $font-color-active;
+  //           font-weight: 600;
+  //         }
+  //       }
+  //     }
+  //   }
 
-    .arco-menu-selected-label {
-      display: none;
-    }
-  }
+  //   .arco-menu-selected-label {
+  //     display: none;
+  //   }
+  // }
 }
 </style>

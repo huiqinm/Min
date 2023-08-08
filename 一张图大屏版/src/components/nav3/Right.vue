@@ -1,12 +1,26 @@
 <script setup>
-import { ref, toRaw, onMounted, onActivated, reactive } from "vue";
+import { ref, reactive, onMounted, onActivated, onDeactivated } from "vue";
+
 import { storeToRefs } from "pinia";
+import { usePanelStore } from "@/stores";
+const panelStore = usePanelStore();
+let { panelState } = storeToRefs(panelStore);
 
 onMounted(() => {});
 
-onActivated(() => {});
+onActivated(() => {
+  let obj = panelState.value;
+  obj.rightWidth = 10;
+  panelStore.setPanelState(obj);
+});
+
+onDeactivated(() => {
+  let obj = panelState.value;
+  obj.rightWidth = 30;
+  panelStore.setPanelState(obj);
+});
 </script>
 
 <template>
-  <div>nav3-right</div>
+  <div>nav1-right</div>
 </template>

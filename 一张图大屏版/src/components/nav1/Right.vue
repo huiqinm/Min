@@ -10,12 +10,14 @@ onMounted(() => {});
 
 onActivated(() => {
   let obj = panelState.value;
+  obj.rightWidth = 50;
   obj.showRight = false;
   panelStore.setPanelState(obj);
 });
 
 onDeactivated(() => {
   let obj = panelState.value;
+  obj.rightWidth = 30;
   obj.showRight = true;
   panelStore.setPanelState(obj);
 });

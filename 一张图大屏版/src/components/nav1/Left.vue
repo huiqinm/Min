@@ -1,5 +1,12 @@
 <script setup>
-import { ref, toRaw, onMounted, onActivated, reactive } from "vue";
+import {
+  ref,
+  toRaw,
+  onMounted,
+  onActivated,
+  onDeactivated,
+  reactive,
+} from "vue";
 import { storeToRefs } from "pinia";
 import { usePanelStore } from "@/stores";
 const panelStore = usePanelStore();
@@ -7,7 +14,17 @@ let { panelState } = storeToRefs(panelStore);
 
 onMounted(() => {});
 
-onActivated(() => {});
+onActivated(() => {
+  let obj = panelState.value;
+  obj.leftWidth = 50;
+  panelStore.setPanelState(obj);
+});
+
+onDeactivated(() => {
+  let obj = panelState.value;
+  obj.leftWidth = 30;
+  panelStore.setPanelState(obj);
+});
 
 function hdClick() {
   let obj = panelState.value;
@@ -17,7 +34,7 @@ function hdClick() {
 </script>
 
 <template>
-  <div>
+  <div style="position: absolute; bottom: 0; right: 0">
     <div>nav1-left</div>
     <a-button @click="hdClick">click</a-button>
   </div>

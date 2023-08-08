@@ -35,17 +35,8 @@ let swiperOption = {
   spaceBetween: 0,
   slidesPerView: 4, // 一屏显示的slide个数  'auto'
   slidesPerGroup: 1, //每组多少个swiper滑块
-  // centeredSlides: true, // 居中的slide是否标记为active，默认是最左active,这样样式即可生效
-  // slideToClickedSlide: true, // 点击的slide会居中
-  // loop: true, // 循环播放, 可有无限滚动效果，初始加载即是滚动后的效果
-  scrollbar: { draggable: true },
-  grabCursor: true, //抓手光标
-  // autoplay: {
-  //   delay: 3000,
-  //   disableOnInteraction: false, //用户操作swiper之后，是否禁止autoplay
-  //   pauseOnMouseEnter: true, //鼠标置于swiper是否时暂停自动切换
-  // },
-  //使用前进后退按钮来控制Swiper切换。
+  // scrollbar: { draggable: true },
+  grabCursor: false, //抓手光标
   // navigation: true,  //1:默认前进后退按钮在容器内
   // 2:前进后退按钮在容器外
   navigation: {
@@ -54,11 +45,6 @@ let swiperOption = {
     hiddenClass: "button-hidden", //隐藏时的class
     disabledClass: "button-disabled", //不可用时的class
   },
-
-  //使用分页器导航
-  // pagination: {
-  //   clickable: true,
-  // },
 };
 
 let menuList = [
@@ -66,11 +52,7 @@ let menuList = [
   { path: "/nav1", text: "土地监关" },
   { path: "/nav2", text: "住建业务决策" },
   { path: "/nav3", text: "住建系统决策" },
-  { path: "/nav3", text: "aa" },
-  { path: "/nav3", text: "bb" },
-  { path: "/nav3", text: "cc" },
-  { path: "/nav3", text: "dd" },
-  { path: "/nav3", text: "ee" },
+  { path: "/test", text: "test" },
 ];
 
 onMounted(() => {});
@@ -80,16 +62,8 @@ function onMenuItemClick(val) {
   $router.push(val);
 }
 
-function onSwiper(swiper) {
-  console.log(swiper);
-}
-
-function onSlideChange(val) {
-  console.log(val);
-}
-
 function onMenuClick(path) {
-  console.log("path===========", path);
+  $router.push(path);
 }
 </script>
 
@@ -100,30 +74,24 @@ function onMenuClick(path) {
       :selected-keys="[$router.currentRoute.path]"
       @menu-item-click="onMenuItemClick"
     >
-      <a-menu-item key="/">
-        CIM数据视窗<!-- <RouterLink to="/">Home</RouterLink> -->
+      <a-menu-item v-for="item in menuList" :key="item.path">
+        {{ item.text }}
       </a-menu-item>
-      <a-menu-item key="/nav1"> 土地监关 </a-menu-item>
-      <a-menu-item key="/nav2"> 住建业务决策 </a-menu-item>
-      <a-menu-item key="/nav3"> 住建系统决策 </a-menu-item>
-      <a-menu-item key="/nav3"> 住建系统决策 </a-menu-item>
     </a-menu>
     <div class="swiper-wrap">
-      <swiper
-        :modules="modules"
-        class="mySwiper"
-        v-bind="swiperOption"
-        @swiper="onSwiper"
-        @slideChange="onSlideChange"
-      >
+      <swiper :modules="modules" class="mySwiper" v-bind="swiperOption">
         <swiper-slide v-for="(item, index) in menuList" :key="index">
-          <a-button @click="onMenuClick(item.path)">{{ item.text }}</a-button>
+          <a-button
+            :class="{ active: $router.currentRoute.path === item.path }"
+            @click="onMenuClick(item.path)"
+            >{{ item.text }}</a-button
+          >
         </swiper-slide>
       </swiper>
       <!--左箭头。如果放置在swiper-container外面，需要自定义样式。-->
-      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-prev swiper-button"></div>
       <!--右箭头。如果放置在swiper-container外面，需要自定义样式。-->
-      <div class="swiper-button-next"></div>
+      <div class="swiper-button-next swiper-button"></div>
     </div>
   </div>
 </template>

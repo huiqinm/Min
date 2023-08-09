@@ -98,17 +98,16 @@ function onMenuClick(path) {
 <style lang="scss" scoped src="./my_swiper.scss"></style>
 <style scoped lang="scss">
 .menu-wrap {
+  width: 64.5rem;
   position: absolute;
+  left: calc(50% - 32.25rem);
   bottom: 1.5rem;
-  width: 100%;
-  // display: flex;
-  justify-content: center;
 
   .swiper-wrap {
     background-image: url("../../../assets/images/common/bg/menubg.png");
     background-size: 100% 100%;
     margin: 0 auto;
-    width: 64.5rem;
+    width: 100%;
     height: 4.8rem;
     padding: 0 10rem;
   }

@@ -37,14 +37,8 @@ let widthList = [
   },
 ];
 
-const num3 = computed(() => {
-  return Number(num1.value) + Number(num2.value);
-});
-
 const expandWidthLeft = computed(() => {
   let obj = widthList.find((item) => item.path === $router.currentRoute.path);
-  console.log(" $router.currentRoute.path======", $router.currentRoute.path);
-  console.log("obj1======", obj);
   return obj ? obj.left_width : 30;
 });
 

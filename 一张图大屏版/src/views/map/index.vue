@@ -18,6 +18,7 @@ function greet(val) {
 <template>
   <div class="map-wrap">
     <div class="map">
+      <!-- 图例 -->
       <div
         class="legend-wrap"
         :style="{
@@ -28,6 +29,7 @@ function greet(val) {
       >
         <div><button @click="greet('图例')">图例</button></div>
       </div>
+      <!-- 工具条 -->
       <div
         class="tool-wrap"
         :style="{
@@ -36,8 +38,8 @@ function greet(val) {
           bottom: '1rem',
         }"
       >
-        <div><button @click="greet('工具条')">工具条</button></div>
-        <div><button @click="greet('工具条')">工具条2</button></div>
+        <div><button @click="greet('工具条')">工具1</button></div>
+        <div><button @click="greet('工具条')">工具2</button></div>
       </div>
     </div>
   </div>

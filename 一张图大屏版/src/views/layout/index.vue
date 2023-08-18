@@ -23,7 +23,7 @@ let { panelState } = storeToRefs(panelStore);
 // 面板展开与收起 // TODO 路由切换，恢复默认展开
 const leftCollapse = ref(false); //左侧面板是否收起
 const rightCollapse = ref(false); //右侧面板是否收起
-
+//不同专题（路由）不同宽度，默认30rem
 let widthList = [
   {
     path: "/nav1",

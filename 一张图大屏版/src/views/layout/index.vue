@@ -24,7 +24,13 @@ let { panelState } = storeToRefs(panelStore);
 const leftCollapse = ref(false); //左侧面板是否收起
 const rightCollapse = ref(false); //右侧面板是否收起
 //不同专题（路由）不同宽度，默认30rem
+// 配置非默认专题宽度
 let widthList = [
+  {
+    path: "/",
+    left_width: 21.15,
+    right_width: 46.9,
+  },
   {
     path: "/nav1",
     left_width: 50,
@@ -163,25 +169,47 @@ function toggleCollapseRight() {
 
 <style scoped lang="scss">
 .main-wrap {
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
   // TODO 暂时
-  height: 1080px;
+  // height: 1080px;
 
   .panel-wrap {
     height: calc(100% - 6.25rem);
-    background: #333c4c;
     opacity: 0.88;
     position: absolute;
     top: 5.25rem;
-
-    transition: all 0.5s;
+    background: #2c2929a3;
+    transition: all 0.3s;
 
     .component-wrap {
       height: 100%;
       overflow: hidden;
       &:hover {
         overflow: auto;
+      }
+
+      :deep(.page-wrap) {
+        height: 100%;
+        .module {
+          background: $backgroud-color-dark;
+          border-bottom: 0.1rem solid #7585a3;
+          display: flex;
+          flex-direction: column;
+          &:not(:last-child) {
+            margin-bottom: 0.8rem;
+          }
+          .content {
+            padding: 1rem 1.2rem;
+            flex: 1;
+            overflow: hidden;
+
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
       }
     }
 

@@ -11,6 +11,9 @@ import {
 } from "vue";
 
 import { useRouter } from "vue-router";
+import Time from "@/components/header/Time.vue";
+import Weather from "@/components/header/Weather.vue";
+
 let $router = reactive(useRouter());
 
 onMounted(() => {});
@@ -25,9 +28,9 @@ onUpdated(() => {});
       <h3>测试版</h3>
     </div>
     <div class="right-wrap">
-      <div class="time">2023/05/21 2:30 PM</div>
+      <div class="time"><Time /></div>
       <a-divider direction="vertical" />
-      <div class="weather">多云 28C° AQI:126</div>
+      <div class="weather"><Weather /></div>
       <a-divider direction="vertical" />
       <div class="set">
         <a-button type="primary">
@@ -81,16 +84,48 @@ onUpdated(() => {});
     align-items: center;
     color: $font-color-secondary;
     font-size: 1.2rem;
-    line-height: 1.2rem;
-    .time {
-      background-image: url("../../../assets/images/common/bg/timebg.png");
+    line-height: 1;
+
+    .time,
+    .weather {
       background-size: 100% 100%;
+      display: flex;
+      align-items: center;
       padding: 0.3rem 1.2rem;
     }
-    .weather {
+    .time {
+      background-image: url("../../../assets/images/common/bg/timebg.png");
+    }
+    :deep(.weather) {
       background-image: url("../../../assets/images/common/bg/weatherbg.png");
-      background-size: 100% 100%;
-      padding: 0.3rem 1.2rem;
+      z-index: 3;
+      // height: 1.8rem;
+      // padding: 0 1.2rem;
+      #he-plugin-simple {
+        font-size: 0.5rem !important;
+        .s-sticker {
+          display: flex;
+          align-items: center;
+          font-size: 1.2rem !important;
+          padding: 0 !important;
+
+          > div {
+            line-height: 1 !important;
+            display: flex;
+          }
+          .s-sticker-cond {
+            height: 1.2rem;
+            display: flex;
+            align-items: center;
+          }
+        }
+        img {
+          width: 1.5rem;
+          height: 1.5rem;
+          min-width: 12px;
+          min-height: 12px;
+        }
+      }
     }
     .set {
       display: inherit;

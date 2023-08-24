@@ -43,11 +43,13 @@ let widthList = [
   },
 ];
 
+// 左侧面板展开宽度
 const expandWidthLeft = computed(() => {
   let obj = widthList.find((item) => item.path === $router.currentRoute.path);
   return obj ? obj.left_width : 30;
 });
 
+// 右侧面板展开宽度
 const expandWidthRight = computed(() => {
   let obj = widthList.find((item) => item.path === $router.currentRoute.path);
   return obj ? obj.right_width : 30;
@@ -126,14 +128,16 @@ function toggleCollapseRight() {
       :style="{ width: `${panelState.leftWidth}rem` }"
     >
       <div class="component-wrap">
-        <router-view v-slot="{ Component }" name="left">
-          <Transition name="fade-transform" mode="out-in">
-            <keep-alive :exclude="['about1']">
-              <component :is="Component" />
-            </keep-alive>
-          </Transition>
-        </router-view>
-        <!-- <router-view name="left" /> -->
+        <div :style="{ width: `${expandWidthLeft}rem` }">
+          <router-view v-slot="{ Component }" name="left">
+            <Transition name="fade-transform" mode="out-in">
+              <keep-alive :exclude="['about1']">
+                <component :is="Component" />
+              </keep-alive>
+            </Transition>
+          </router-view>
+          <!-- <router-view name="left" /> -->
+        </div>
       </div>
       <a-button class="collapse-btn" shape="circle" @click="toggleCollapseLeft">
         <icon-right v-if="leftCollapse" />
@@ -147,13 +151,15 @@ function toggleCollapseRight() {
       :style="{ width: `${panelState.rightWidth}rem` }"
     >
       <div class="component-wrap">
-        <router-view v-slot="{ Component }" name="right">
-          <Transition name="fade-transform" mode="out-in">
-            <keep-alive :exclude="['about1']">
-              <component :is="Component" />
-            </keep-alive>
-          </Transition>
-        </router-view>
+        <div :style="{ width: `${expandWidthRight}rem` }">
+          <router-view v-slot="{ Component }" name="right">
+            <Transition name="fade-transform" mode="out-in">
+              <keep-alive :exclude="['about1']">
+                <component :is="Component" />
+              </keep-alive>
+            </Transition>
+          </router-view>
+        </div>
       </div>
       <a-button
         class="collapse-btn"
@@ -171,8 +177,6 @@ function toggleCollapseRight() {
 .main-wrap {
   height: 100%;
   overflow: hidden;
-  // TODO 暂时
-  // height: 1080px;
 
   .panel-wrap {
     height: calc(100% - 6.25rem);
@@ -180,13 +184,17 @@ function toggleCollapseRight() {
     position: absolute;
     top: 5.25rem;
     background: #2c2929a3;
-    transition: all 0.3s;
+    transition: all 0.5s;
 
     .component-wrap {
       height: 100%;
       overflow: hidden;
       &:hover {
-        overflow: auto;
+        overflow-y: auto;
+      }
+
+      > div {
+        height: 100%;
       }
 
       :deep(.page-wrap) {
@@ -225,7 +233,7 @@ function toggleCollapseRight() {
 
     &.left-wrap {
       left: 2.4rem;
-      border-right: 0.05rem solid var(--color-border);
+      // border-right: 0.05rem solid var(--color-border);
 
       .collapse-btn {
         right: -1.65rem;
@@ -234,7 +242,7 @@ function toggleCollapseRight() {
 
     &.right-wrap {
       right: 2.4rem;
-      border-left: 0.05rem solid var(--color-border);
+      // border-left: 0.05rem solid var(--color-border);
 
       .collapse-btn {
         left: -1.65rem;

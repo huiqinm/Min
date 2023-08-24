@@ -110,7 +110,7 @@ onActivated(() => {});
     background-size: 100% 100%;
     .legend-wrap,
     .tool-wrap {
-      transition: all 0.3s;
+      transition: all 0.5s;
     }
 
     .legend-wrap {

@@ -1,0 +1,1 @@
+import{o as a,c as o,a as e,_ as r}from"./index-af9f99bf.js";import _ from"./AboutView-6c115767.js";const m={__name:"HelloWorld",setup(c){return(t,s)=>(a(),o("div",null,[e(r),e(_)]))}};export{m as default};

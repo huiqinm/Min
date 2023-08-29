@@ -6,11 +6,14 @@ import {
   onActivated,
   onDeactivated,
   reactive,
+  computed,
 } from "vue";
 import { storeToRefs } from "pinia";
 import { usePanelStore } from "@/stores";
 const panelStore = usePanelStore();
 let { panelState } = storeToRefs(panelStore);
+
+const now = computed(() => Date.now());
 
 onMounted(() => {});
 
@@ -34,8 +37,9 @@ function hdClick() {
 </script>
 
 <template>
-  <div style="position: absolute; bottom: 0; right: 0">
+  <div style="font-size: 1.5rem">
     <div>nav1-left</div>
+    <div>now:{{ now }}</div>
     <a-button @click="hdClick">click</a-button>
   </div>
 </template>

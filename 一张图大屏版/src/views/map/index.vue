@@ -4,17 +4,18 @@ import { ref, toRaw, onMounted, onActivated, reactive } from "vue";
 import { storeToRefs } from "pinia";
 import { usePanelStore } from "@/stores";
 import Title from "@/components/common/Title.vue";
+import MapTool from "@/components/map/MapTool.vue";
 
-import icon_jkp from "@/assets/images/common/icons/aed.png";
-import icon_mls from "@/assets/images/common/icons/aed.png";
-import icon_qd from "@/assets/images/common/icons/aed.png";
-import icon_zd from "@/assets/images/common/icons/aed.png";
-import icon_zfd from "@/assets/images/common/icons/aed.png";
-import icon_aed from "@/assets/images/common/icons/aed.png";
-import icon_ylz from "@/assets/images/common/icons/医疗站.png";
-import icon_jhc from "@/assets/images/common/icons/救护车.png";
-import icon_wrj from "@/assets/images/common/icons/无人机.png";
-import icon_sxt from "@/assets/images/common/icons/监控.png";
+import icon_jkp from "@/assets/images/map/legend/jkp.png";
+import icon_mls from "@/assets/images/map/legend/mls.png";
+import icon_qd from "@/assets/images/map/legend/qd.png";
+import icon_zd from "@/assets/images/map/legend/zd.png";
+import icon_zfd from "@/assets/images/map/legend/zfd.png";
+import icon_aed from "@/assets/images/map/legend/aed.png";
+import icon_ylz from "@/assets/images/map/legend/ylz.png";
+import icon_jhc from "@/assets/images/map/legend/jhc.png";
+import icon_wrj from "@/assets/images/map/legend/wrj.png";
+import icon_sxt from "@/assets/images/map/legend/sxt.png";
 
 const panelStore = usePanelStore();
 let { panelState } = storeToRefs(panelStore);
@@ -64,6 +65,10 @@ const legendList = [
 onMounted(() => {});
 
 onActivated(() => {});
+
+function onToolClick(val) {
+  console.log("onToolClick============", val);
+}
 </script>
 
 <template>
@@ -74,13 +79,13 @@ onActivated(() => {});
         class="legend-wrap"
         :style="{
           position: 'absolute',
-          left: panelState.leftWidth + 2.4 + 1 + 'rem',
+          left: panelState.leftWidth + 2.4 + 1.5 + 'rem',
           top: '5.25rem',
         }"
       >
         <Title text="图例" />
         <ul class="legend-list">
-          <li v-for="(item, index) in legendList" :key="index" v-bind="item">
+          <li v-for="(item, index) in legendList" :key="index">
             <img :src="item.icon" />{{ item.label }}
           </li>
         </ul>
@@ -94,8 +99,7 @@ onActivated(() => {});
           bottom: '1rem',
         }"
       >
-        <div><button @click="greet('工具条')">工具1</button></div>
-        <div><button @click="greet('工具条')">工具2</button></div>
+        <MapTool @tool-click="onToolClick" />
       </div>
     </div>
   </div>
@@ -106,18 +110,19 @@ onActivated(() => {});
   overflow: hidden;
   .map {
     height: 100%;
-    background: url("../../assets/images/map/map2.png");
+    background: url("../../assets/images/map/map.png");
     background-size: 100% 100%;
     .legend-wrap,
     .tool-wrap {
       transition: all 0.5s;
+      background-color: $backgroud-color-dark;
+      opacity: 0.88;
     }
 
     .legend-wrap {
       width: 12.9rem;
       height: 35.25rem;
-      background-color: $backgroud-color-dark;
-      opacity: 0.88;
+
       .legend-list {
         padding: 1.85rem 0 0 0.6rem;
         li {
@@ -136,6 +141,10 @@ onActivated(() => {});
           }
         }
       }
+    }
+
+    .tool-wrap {
+      border-radius: 1rem;
     }
   }
 }

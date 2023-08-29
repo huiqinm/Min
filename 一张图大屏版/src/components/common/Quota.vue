@@ -40,6 +40,8 @@ onActivated(() => {});
   .left {
     width: 1.6rem;
     height: 1.6rem;
+    position: relative;
+    top: -0.2rem;
   }
   .right {
     .label {

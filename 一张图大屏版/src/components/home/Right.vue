@@ -4,7 +4,13 @@ import { storeToRefs } from "pinia";
 import { usePanelStore } from "@/stores";
 
 import Title from "@/components/common/Title.vue";
-import sssp_img from "@/assets/images/common/temp/sssp.png";
+import Border from "@/components/common/Border.vue";
+import m1_img from "@/assets/images/common/temp/m1.png";
+import m2_img from "@/assets/images/common/temp/m2.png";
+import m3_img from "@/assets/images/common/temp/m3.png";
+import m4_img from "@/assets/images/common/temp/m4.png";
+import m5_img from "@/assets/images/common/temp/m5.png";
+import m6_img from "@/assets/images/common/temp/m6.png";
 
 const panelStore = usePanelStore();
 let { panelState } = storeToRefs(panelStore);
@@ -12,27 +18,27 @@ let { panelState } = storeToRefs(panelStore);
 const videoList = [
   {
     label: "起点-龙翔大道",
-    img: sssp_img,
+    img: m1_img,
   },
   {
     label: "黄阁路",
-    img: sssp_img,
+    img: m2_img,
   },
   {
     label: "终点-大运中心",
-    img: sssp_img,
+    img: m3_img,
   },
   {
     label: "大运路",
-    img: sssp_img,
+    img: m4_img,
   },
   {
     label: "终点-龙翔大道",
-    img: sssp_img,
+    img: m5_img,
   },
   {
     label: "国际大学园路",
-    img: sssp_img,
+    img: m6_img,
   },
 ];
 
@@ -55,15 +61,18 @@ onDeactivated(() => {
   <div class="page-wrap">
     <div class="module modu1">
       <Title text="监控视频" />
-      <div class="content">
-        <ul class="video-list">
-          <li v-for="(item, index) in videoList" :key="index" v-bind="item">
-            <div class="label">{{ item.label }}</div>
-            <div class="img-wrap"><img :src="item.img" /></div>
-          </li>
-        </ul>
+      <div class="content-wrap">
+        <div class="content">
+          <ul class="video-list">
+            <li v-for="(item, index) in videoList" :key="index">
+              <div class="label">{{ item.label }}</div>
+              <div class="img-wrap"><img :src="item.img" /></div>
+            </li>
+          </ul>
+        </div>
       </div>
-      <Border />
+
+      <border />
     </div>
   </div>
 </template>
@@ -72,8 +81,12 @@ onDeactivated(() => {
   .modu1 {
     height: 100%;
 
+    .title {
+      margin-bottom: 0.5rem;
+    }
+
     .content {
-      margin-top: 0.5rem;
+      padding-bottom: 0.5rem !important;
     }
 
     .video-list {

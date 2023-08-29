@@ -10,7 +10,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
   const env = loadEnv(mode, process.cwd());
   return {
     // base: "./",
-    // base: "/demo/",
+    // base: "/dpsystemLargeScreen/",
     // base: env.VITE_PUBLIC_PATH, // 解决项目部署服务器二级目录问题（如果你是顶级域名部署 这些可不用做）
     plugins: [
       // vue(),

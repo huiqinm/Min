@@ -20,7 +20,7 @@ import { usePanelStore } from "@/stores";
 const panelStore = usePanelStore();
 let { panelState } = storeToRefs(panelStore);
 
-// 面板展开与收起 // TODO 路由切换，恢复默认展开
+// 面板展开与收起
 const leftCollapse = ref(false); //左侧面板是否收起
 const rightCollapse = ref(false); //右侧面板是否收起
 //不同专题（路由）不同宽度，默认30rem
@@ -59,14 +59,17 @@ const expandWidthRight = computed(() => {
 watch(
   () => $router.currentRoute.name,
   async (newValue, oldValue) => {
+    // 路由切换，恢复默认展开
+    leftCollapse.value = false;
+    rightCollapse.value = false;
     // document.querySelector(".main-wrap").scrollTop = 0; //滚动条复位
   }
 );
 
-// 监听showLeft-左侧面板是否显示，设置左侧面板宽度
+// 监听showLeft-左侧面板是否显示，设置左侧面板宽度(图例等根据面板宽度相对定位)
 watch(
   () => panelStore.panelState.showLeft,
-  async (newValue, oldValue) => {
+  (newValue, oldValue) => {
     let leftPanel = newValue ? expandWidthLeft.value : 0;
     //设置全局状态
     let obj = panelState.value;
@@ -75,10 +78,10 @@ watch(
   }
 );
 
-// 监听showRight-右侧面板是否显示，设置右侧面板宽度
+// 监听showRight-右侧面板是否显示，设置右侧面板宽度(图例等根据面板宽度相对定位)
 watch(
   () => panelStore.panelState.showRight,
-  async (newValue, oldValue) => {
+  (newValue, oldValue) => {
     let rightPanel = newValue ? expandWidthRight.value : 0;
     //设置全局状态
     let obj = panelState.value;
@@ -131,7 +134,7 @@ function toggleCollapseRight() {
         <div :style="{ width: `${expandWidthLeft}rem` }">
           <router-view v-slot="{ Component }" name="left">
             <Transition name="fade-transform" mode="out-in">
-              <keep-alive :exclude="['about1']">
+              <keep-alive :exclude="['test1']">
                 <component :is="Component" />
               </keep-alive>
             </Transition>
@@ -154,7 +157,7 @@ function toggleCollapseRight() {
         <div :style="{ width: `${expandWidthRight}rem` }">
           <router-view v-slot="{ Component }" name="right">
             <Transition name="fade-transform" mode="out-in">
-              <keep-alive :exclude="['about1']">
+              <keep-alive :exclude="['test1']">
                 <component :is="Component" />
               </keep-alive>
             </Transition>
@@ -207,14 +210,18 @@ function toggleCollapseRight() {
           &:not(:last-child) {
             margin-bottom: 0.8rem;
           }
-          .content {
-            padding: 1rem 1.2rem;
+          .content-wrap {
             flex: 1;
             overflow: hidden;
 
-            img {
-              width: 100%;
+            .content {
               height: 100%;
+              padding: 1rem 1.2rem;
+
+              img {
+                width: 100%;
+                height: 100%;
+              }
             }
           }
         }
@@ -223,12 +230,16 @@ function toggleCollapseRight() {
 
     .collapse-btn {
       font-size: 1.4rem;
-      width: 3.3rem;
-      height: 3.3rem;
+      width: 2.5rem;
+      height: 2.5rem;
       position: absolute;
+      top: 10%;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 0;
 
-      top: 30%;
-      background: rgba(0, 0, 0, 0.5);
+      &:hover {
+        background: rgba(0, 0, 0, 0.9);
+      }
     }
 
     &.left-wrap {
@@ -236,7 +247,7 @@ function toggleCollapseRight() {
       // border-right: 0.05rem solid var(--color-border);
 
       .collapse-btn {
-        right: -1.65rem;
+        right: -1.25rem;
       }
     }
 
@@ -245,7 +256,7 @@ function toggleCollapseRight() {
       // border-left: 0.05rem solid var(--color-border);
 
       .collapse-btn {
-        left: -1.65rem;
+        left: -1.25rem;
       }
     }
   }

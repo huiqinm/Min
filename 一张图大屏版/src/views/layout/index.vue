@@ -69,7 +69,7 @@ watch(
 // 监听showLeft-左侧面板是否显示，设置左侧面板宽度(图例等根据面板宽度相对定位)
 watch(
   () => panelStore.panelState.showLeft,
-  (newValue, oldValue) => {
+  async (newValue, oldValue) => {
     let leftPanel = newValue ? expandWidthLeft.value : 0;
     //设置全局状态
     let obj = panelState.value;
@@ -81,7 +81,7 @@ watch(
 // 监听showRight-右侧面板是否显示，设置右侧面板宽度(图例等根据面板宽度相对定位)
 watch(
   () => panelStore.panelState.showRight,
-  (newValue, oldValue) => {
+  async (newValue, oldValue) => {
     let rightPanel = newValue ? expandWidthRight.value : 0;
     //设置全局状态
     let obj = panelState.value;

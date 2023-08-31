@@ -44,7 +44,7 @@ const router = createRouter({
       path: "/:path(.*)+",
       //  path: "/:pathMatch(.*)*",
       redirect: {
-        name: "nav1",
+        name: "nav2",
       },
     },
   ],

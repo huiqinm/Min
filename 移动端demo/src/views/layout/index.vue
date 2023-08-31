@@ -8,7 +8,6 @@ import {
   onUnmounted,
   nextTick,
 } from "vue";
-import Header from "./header/index.vue";
 import Menu from "./menu/index.vue";
 import { useRouter } from "vue-router";
 
@@ -34,20 +33,17 @@ onUnmounted(() => {});
 
 <template>
   <div class="main-wrap">
-    <!-- 头部 -->
-    <Header />
-    <!-- 导航菜单 -->
-    <Menu />
-
-    <div class="component-wrap" style="height: 100%">
+    <div class="component-wrap">
       <router-view v-slot="{ Component }">
-        <Transition name="fade-transform" mode="out-in">
+        <Transition mode="out-in">
           <keep-alive>
             <component :is="Component" />
           </keep-alive>
         </Transition>
       </router-view>
     </div>
+    <!-- 导航菜单 -->
+    <div class="menu-wrap"><Menu /></div>
   </div>
 </template>
 
@@ -55,5 +51,15 @@ onUnmounted(() => {});
 .main-wrap {
   height: 100%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  .component-wrap {
+    // flex: 1;
+    overflow: auto;
+    background: pink;
+  }
+  .menu-wrap {
+  }
 }
 </style>

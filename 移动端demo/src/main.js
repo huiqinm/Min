@@ -7,6 +7,9 @@ import router from "./router";
 import "./assets/main.css";
 import "@/styles/index.scss"; // global css
 
+// Vant 桌面端适配
+import "@vant/touch-emulator";
+
 /* --------------------------------
 Vant 中有个别组件是以函数的形式提供的，
 包括 Toast，Dialog，Notify 和 ImagePreview 组件。

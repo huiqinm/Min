@@ -57,7 +57,6 @@ onUnmounted(() => {});
   .component-wrap {
     // flex: 1;
     overflow: auto;
-    background: pink;
   }
   .menu-wrap {
   }

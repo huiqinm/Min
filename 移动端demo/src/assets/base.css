@@ -32,11 +32,11 @@
 
   --color-heading: var(--vt-c-text-light-1);
   --color-text: var(--vt-c-text-light-1);
-  /* --color-text: #ffffff; */
 
   --section-gap: 160px;
 }
 
+/* 监听设备暗黑模式 */
 @media (prefers-color-scheme: dark) {
   :root {
     --color-background: var(--vt-c-black);

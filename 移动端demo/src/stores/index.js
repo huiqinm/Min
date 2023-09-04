@@ -1,5 +1,19 @@
 import { defineStore } from "pinia";
 
+//主题
+export const useThemeStore = defineStore("themeState", {
+  state: () => {
+    return {
+      themeState: { mode: "light" }, // light || dark
+    };
+  },
+  actions: {
+    setThemeState(obj) {
+      this.themeState = obj;
+    },
+  },
+});
+
 //用户信息
 export const useUserInfoStore = defineStore("userInfo", {
   state: () => {

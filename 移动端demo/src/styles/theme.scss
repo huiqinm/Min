@@ -14,18 +14,20 @@ $icon-color-secondary: #e1e6f0;
 $icon-color-active: #b4dcff;
 $bg-color-hover: #f6f8fc;
 
-/* placeholder */
-$placeholder-color: #999999;
-@mixin placeholder {
-  &::-webkit-input-placeholder {
-    color: $placeholder-color;
-  }
+// 浅色主题模式
+.van-theme-light {
+  --van-primary-color: var(--van-blue);
+}
+// 深色主题模式
+.van-theme-dark {
+  --van-primary-color: var(--van-green);
 
-  &::-moz-input-placeholder {
-    color: $placeholder-color;
+  &,
+  * {
+    color-scheme: dark !important;
   }
+}
 
-  &::-ms-input-placeholder {
-    color: $placeholder-color;
-  }
+:root {
+  color-scheme: dark;
 }

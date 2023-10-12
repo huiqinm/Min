@@ -76,11 +76,11 @@ const list = reactive([
     matchAddress: "广东省佛山市顺德区乐从镇平步社区工业区北五路4号",
     MatchRatio: "",
   },
-  {
-    originalAddress: "广东省佛山市顺德区乐从镇良教南便街五巷13号（住所申报）",
-    matchAddress: "广东省佛山市顺德区乐从镇良教村南便街五巷13号",
-    MatchRatio: "",
-  },
+  // {
+  //   originalAddress: "广东省佛山市顺德区乐从镇良教南便街五巷13号（住所申报）",
+  //   matchAddress: "广东省佛山市顺德区乐从镇良教村南便街五巷13号",
+  //   MatchRatio: "",
+  // },
 ]);
 
 function toMatch(dataArr) {
@@ -123,7 +123,7 @@ function getInitial(str) {
   initialArr.forEach((item) => {
     initialStr += item.toUpperCase();
   });
-  console.log("首字母大写字符串============", initialStr);
+  // console.log("首字母大写字符串============", initialStr);
 }
 </script>
 

@@ -24,14 +24,9 @@ function onMenuItemClick(val) {
 
 onMounted(() => {
   nextTick(() => {
-    // window.addEventListener("scroll", onScroll);
-    window.addEventListener("scroll", aa);
+    window.addEventListener("scroll", onScroll);
   });
 });
-
-function aa() {
-  debounce(onScroll);
-}
 
 onUpdated(() => {});
 onUnmounted(() => {
@@ -57,16 +52,6 @@ async function onScroll() {
   } else {
     position.value = "fixed";
   }
-}
-let timer = null;
-
-function debounce(fn) {
-  if (timer) {
-    clearTimeout(timer);
-  }
-  timer = setTimeout(() => {
-    fn();
-  }, 0.1);
 }
 </script>
 

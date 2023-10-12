@@ -12,7 +12,7 @@ import { IconPlus, IconDelete } from "@arco-design/web-vue/es/icon";
   background: var(--vt-c-divider-light-1);
   display: flex;
   align-items: center;
-  // height: 5rem;
+  height: 5rem;
   .content {
     font-weight: bold;
   }

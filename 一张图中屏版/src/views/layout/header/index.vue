@@ -14,6 +14,7 @@ import { useRouter } from "vue-router";
 import Time from "@/components/header/Time.vue";
 import Weather from "@/components/header/Weather.vue";
 import Divider from "@/components/header/Divider.vue";
+import NavDrawer from "@/components/header/NavDrawer.vue";
 
 import img_l1 from "@/assets/images/header/l1.svg";
 import img_l2 from "@/assets/images/header/l2.svg";
@@ -29,13 +30,13 @@ import img_r4 from "@/assets/images/header/r4.svg";
 import { ArrowDownBold } from "@element-plus/icons-vue";
 
 let $router = reactive(useRouter());
-const drawer = ref(false);
+const navDrawer = ref(false);
 
 onMounted(() => {});
 onUpdated(() => {});
 
-function handleClose() {
-  drawer.value = false;
+function setShowDrawer(val) {
+  navDrawer.value = val;
 }
 </script>
 
@@ -46,7 +47,7 @@ function handleClose() {
       <img :src="img_l1" class="h56" />
       <img :src="img_title" class="h61" />
       <img :src="img_l2" class="h56" />
-      <el-button @click="drawer = true" class="h40 m_top nav-btn">
+      <el-button @click="navDrawer = true" class="h40 m_top nav-btn">
         CIM+专题融合
         <el-icon style="margin-left: 0.8rem; font-size: 1.8rem"
           ><ArrowDownBold />
@@ -80,14 +81,7 @@ function handleClose() {
       </div>
       <Divider :width="2.4" />
     </div>
-    <el-drawer
-      v-model="drawer"
-      title="I am the title"
-      direction="ttb"
-      :before-close="handleClose"
-    >
-      <span>Hi, there!</span>
-    </el-drawer>
+    <NavDrawer :show="navDrawer" @set-show-drawer="setShowDrawer" />
   </div>
 </template>
 
@@ -100,6 +94,7 @@ function handleClose() {
   justify-content: space-between;
   width: 100%;
   height: 10.8rem;
+  z-index: 6;
 
   .left-wrap {
     display: flex;

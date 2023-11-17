@@ -1,0 +1,61 @@
+:deep(.mySwiper) {
+  height: 100%;
+
+  .swiper-wrapper {
+    .swiper-slide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.swiper-button {
+  // background: pink;
+  width: 1.15rem;
+  height: 1.3rem;
+  background-size: 100% 100%;
+  margin-top: -0.6rem;
+
+  &::after {
+    content: "";
+  }
+  &.swiper-button-prev {
+    left: 8rem;
+    background-image: url("../../../assets/images/common/bg/left.png");
+
+    &:not(.button-disabled):hover {
+      background-image: url("../../../assets/images/common/bg/left-hover.png");
+    }
+  }
+  &.swiper-button-next {
+    right: 8rem;
+    background-image: url("../../../assets/images/common/bg/right.png");
+
+    &:not(.button-disabled):hover {
+      background-image: url("../../../assets/images/common/bg/right-hover.png");
+    }
+  }
+  &.button-disabled {
+    cursor: not-allowed;
+  }
+}
+
+.el-button {
+  background-image: url("../../../assets/images/common/bg/menuitem1.png");
+  background-size: 100% 100%;
+  background-color: transparent;
+  border: none;
+  color: #a8d8d8;
+  font-size: 1.2rem;
+  width: 100%;
+  height: 2.75rem;
+
+  &:hover,
+  &:active,
+  &.active {
+    background-color: transparent;
+    color: $font-color-active;
+    font-weight: 600;
+  }
+}

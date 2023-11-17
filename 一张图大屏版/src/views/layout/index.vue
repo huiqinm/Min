@@ -131,6 +131,7 @@ function toggleCollapseRight() {
       :style="{ width: `${panelState.leftWidth}rem` }"
     >
       <div class="component-wrap">
+        <!-- 防止面板折叠时内容压缩 -->
         <div :style="{ width: `${expandWidthLeft}rem` }">
           <router-view v-slot="{ Component }" name="left">
             <Transition name="fade-transform" mode="out-in">

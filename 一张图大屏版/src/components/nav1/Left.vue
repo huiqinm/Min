@@ -11,6 +11,7 @@ import {
 } from "vue";
 import { storeToRefs } from "pinia";
 import { usePanelStore } from "@/stores";
+
 const panelStore = usePanelStore();
 let { panelState } = storeToRefs(panelStore);
 
@@ -24,8 +25,9 @@ let state = toRef(obj, "num");
 const change = () => {
   state.value++;
   obj.count++;
-  console.log("原始obj", obj);
-  console.log("引用state", state);
+  // console.log("原始obj", obj);
+  // console.log("引用state", state);
+  console.log("window.config============", window.config);
 };
 
 onMounted(() => {});

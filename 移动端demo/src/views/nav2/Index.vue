@@ -69,6 +69,7 @@ const checked = ref(themeState.mode === "dark");
 
 const date = ref("");
 const show = ref(false);
+const showPopup = ref(false);
 
 watch(checked, (val) => {
   let mode = val ? "dark" : "light";
@@ -114,6 +115,15 @@ const onConfirm = (value) => {
       <van-button type="default">默认按钮</van-button>
       <van-button type="warning">警告按钮</van-button>
       <van-button type="danger">危险按钮</van-button>
+    </div>
+    <div>
+      <van-cell title="展示弹出层" is-link @click="showPopup = true" />
+      <van-popup
+        v-model:show="showPopup"
+        position="left"
+        :style="{ width: '30%', height: '100%' }"
+        >内容</van-popup
+      >
     </div>
   </div>
 </template>

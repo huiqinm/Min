@@ -7,7 +7,7 @@ import DefineOptions from "unplugin-vue-define-options/vite";
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode, ssrBuild }) => {
   // command 变量其实就可以判断当前的环境变量如： 本地运行是server 还是打包是build
-  const env = loadEnv(mode, process.cwd());
+  const env = loadEnv(mode, process.cwd() + "/env");
   return {
     // base: "./",
     // base: "/dpsystemLargeScreen/",
